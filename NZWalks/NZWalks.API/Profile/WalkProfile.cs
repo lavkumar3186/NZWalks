@@ -1,5 +1,6 @@
 ﻿using NZWalks.API.Models.Domain;
 using NZWalks.API.Models.DTO;
+using NZWalks.API.Models.DTO.WalkDifficulty;
 
 namespace NZWalks.API.Profile
 {
@@ -12,6 +13,9 @@ namespace NZWalks.API.Profile
             CreateMap<WalkDifficulty, WalkDifficultyDto>().ReverseMap();
             CreateMap<AddWalkRequest, Walk>();
             CreateMap<UpdateWalkRequest, Walk>();
+            //walk difficulty
+            CreateMap<WalkDifficulty, WalkDifficultyDto>().ReverseMap();
+            CreateMap<WalkDifficultyRequest, WalkDifficulty>();
         }
     }
 }
