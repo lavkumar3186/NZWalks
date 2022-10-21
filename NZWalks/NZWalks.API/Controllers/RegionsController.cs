@@ -43,6 +43,10 @@ namespace NZWalks.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRegionAsync(AddRegionRequest addRegionRequest)
         {
+            //commenting it out because using fluent validation
+            //if (!await ValidateAddRegionAsync(addRegionRequest))
+            //    return BadRequest();
+
             //convert to region model
             var region = mapper.Map<Region>(addRegionRequest);
             //pass region to save
@@ -81,6 +85,27 @@ namespace NZWalks.API.Controllers
             //map back to regiondto
             var regionsDto = mapper.Map<RegionDto>(savedRegion);
             return Ok(regionsDto);
+        }
+
+        /// <summary>
+        /// This is validation and this is apply on properties and all CRUD opertions. In all Models
+        /// </summary>
+        /// <param name="addRegionRequest"></param>
+        /// <returns></returns>
+        private async Task<bool> ValidateAddRegionAsync(AddRegionRequest addRegionRequest)
+        {
+            if(addRegionRequest == null)
+            {
+                ModelState.AddModelError(nameof(AddRegionRequest), "$Add region data required");
+                return false;
+            }
+            if (string.IsNullOrEmpty(addRegionRequest.Code))
+            {
+                ModelState.AddModelError(nameof(UpdateRegionRequest.Code), $"{nameof(UpdateRegionRequest.Code)} is required");
+                return false;
+            }
+
+            return ModelState.ErrorCount > 0 ? false : true;
         }
     }
 }

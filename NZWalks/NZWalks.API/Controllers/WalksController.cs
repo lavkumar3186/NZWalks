@@ -38,6 +38,11 @@ namespace NZWalks.API.Controllers
             return Ok(walkDto);
         }
 
+        /// <summary>
+        /// Normal validation are done by fluent validation and DB/custom validation done by normal c# classes
+        /// </summary>
+        /// <param name="addWalkRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddWalkAsync([FromBody]AddWalkRequest addWalkRequest)
         {
